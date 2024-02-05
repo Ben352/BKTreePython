@@ -54,16 +54,24 @@ class BKTree():
                     added = 0 if (word[x-1] == other[y-1]) else 1
                     option3 = matrix[x-1][y-1]+added
                     matrix[x][y] = min(option1,option2,option3)
+        print(matrix[-1][-1])
         return matrix[-1][-1]
+    def print_tree(self, node=None, level=0):
+        if node is None:
+            node = self.root
+        print("  " * level + str(node.value))
+        for child in node.children.values():
+            self.print_tree(child, level + 1)
+
 if __name__ == "__main__":
     spellingTree = BKTree(1)
+    spellingTree.insert("banana")
+    spellingTree.insert("grapes")
+    spellingTree.insert("apple")
+    spellingTree.insert("bannana")
+    spellingTree.insert("graps")
+    spellingTree.insert("aple")
+    spellingTree.insert("cake")
     spellingTree.insert("book")
     spellingTree.insert("books")
-    spellingTree.insert("cake")
-    spellingTree.insert("boo")
-    spellingTree.insert("boon")
-    spellingTree.insert("cook")
-    spellingTree.insert("cake")
-    spellingTree.insert("cape")
-    spellingTree.insert("cart")
-    print(spellingTree.suggest("booggg"))
+    spellingTree.print_tree()
